@@ -1,0 +1,4 @@
+<div>
+    <p> {{$article->title}}</p>
+    <p> {{$article->content}}</p>
+</div>

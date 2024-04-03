@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PHPUnit">
+    <option name="directories">
+      <list>
+        <option value="$PROJECT_DIR$/lara-empty - Copy (3)/tests/Unit" />
+        <option value="$PROJECT_DIR$/lara-empty - Copy (3)/tests/Feature" />
+        <option value="$PROJECT_DIR$/lara-empty/tests/Unit" />
+        <option value="$PROJECT_DIR$/lara-empty/tests/Feature" />
+        <option value="$PROJECT_DIR$/laravel-b1/tests/Unit" />
+        <option value="$PROJECT_DIR$/laravel-b1/tests/Feature" />
+        <option value="$PROJECT_DIR$/lara-empty - Copy (2)/tests/Unit" />
+        <option value="$PROJECT_DIR$/lara-empty - Copy (2)/tests/Feature" />
+        <option value="$PROJECT_DIR$/lara-empty - Copy/tests/Unit" />
+        <option value="$PROJECT_DIR$/lara-empty - Copy/tests/Feature" />
+        <option value="$PROJECT_DIR$/laravel-b2-music-project/tests/Unit" />
+        <option value="$PROJECT_DIR$/laravel-b2-music-project/tests/Feature" />
+      </list>
+    </option>
+  </component>
+</project>
