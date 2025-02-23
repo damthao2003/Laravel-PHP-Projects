@@ -27,22 +27,22 @@
         <div class="mb-3">
             <label class="form-label" for="name">Name</label>
             <input type="text" class="form-control @error('name') error1 @enderror" name="name" id="name" value="{{$person->name}}" >
-{{--             @error('name') <div class="error"> {{ $message }}</div> @enderror--}}
+             @error('name') <div class="error"> {{ $message }}</div> @enderror
         </div>
         <div class="mb-3">
             <label class="form-label" for="email">Email</label>
             <input type="text" class="form-control" name="email" id="email" value="{{$person->email}}">
-{{--            @error('email') <div class="error"> {{$message}}</div> @enderror--}}
+            @error('email') <div class="error"> {{$message}}</div> @enderror
         </div>
         <div class="mb-3">
             <label  class="form-label" for="phone">Phone</label>
             <input type="text" class="form-control" name="phone" id="phone" value="{{$person->phone}}">
-{{--            @error('phone') <div class="error"> {{$message}}</div> @enderror--}}
+            @error('phone') <div class="error"> {{$message}}</div> @enderror
         </div>
         <div class="mb-3">
             <label  class="form-label" for="title">Title</label>
             <input type="text" class="form-control" name="title" id="title" value="{{$person->title}}">
-{{--            @error('title') <div class="error"> {{$message}}</div> @enderror--}}
+            @error('title') <div class="error"> {{$message}}</div> @enderror
         </div>
         <div class="mb-3">
             <label class="form-label" for="department_id">Department</label>
@@ -58,7 +58,7 @@
 {{--                    @endif--}}
                 @endforeach
             </select>
-{{--            @error('department_id') <div class="error"> {{$message}}</div> @enderror--}}
+            @error('department_id') <div class="error"> {{$message}}</div> @enderror
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>

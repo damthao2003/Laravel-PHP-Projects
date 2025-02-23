@@ -19,7 +19,7 @@ class ReviewsTableSeeder extends Seeder
 
         for ($i = 0; $i < 50; $i++) {
             Review::create([
-                'bookID' => $faker->numberBetween(1,50),
+                'bookID' => $faker->numberBetween(61,111),
                 'userID' => $faker->numberBetween(1,50),
                 'rating' =>$faker->numberBetween(1,5),
                 'reviewText' =>$faker->paragraph(1),

@@ -37,19 +37,11 @@ $totalPages = ceil(count($articles) / $itemPerPage);
                             class="bi bi-pencil-square"></i> </a>
                 </td>
                 <td>
-                    {{--                        <a href="{{route('articles.destroy', $article)}}">  <i class="bi bi-trash3-fill"></i> </a>--}}
-                    <!-- Button trigger modal -->
-
                     <form action="{{ route('articles.destroy',$article->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger"><i class="bi bi-trash3-fill"></i></button>
                     </form>
-
-                    {{--                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#{{$article->id}}">--}}
-                    {{--                            <i class="bi bi-trash3-fill"></i>--}}
-
-                    {{--                        </button>--}}
 
                     <!-- Modal -->
                     <div class="modal fade" id="{{$article->id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -72,12 +64,38 @@ $totalPages = ceil(count($articles) / $itemPerPage);
                                             @method('DELETE')
                                             <button type="submit">Xóa</button>
                                         </form>
-
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
+{{--                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#{{$article->id}}">--}}
+{{--                        <i class="bi bi-trash-fill"></i>--}}
+{{--                    </button>--}}
+
+{{--                    <!-- Modal -->--}}
+{{--                    <div class="modal fade" id="{{$article->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">--}}
+{{--                        <div class="modal-dialog">--}}
+{{--                            <div class="modal-content">--}}
+{{--                                <div class="modal-header">--}}
+{{--                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Xóa Nhân Viên</h1>--}}
+{{--                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>--}}
+{{--                                </div>--}}
+{{--                                <div class="modal-body">--}}
+{{--                                    Bạn có chắc chăn muốn xóa nhân viên {{$article->id}} này không ?--}}
+{{--                                </div>--}}
+{{--                                <div class="modal-footer">--}}
+{{--                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Không</button>--}}
+{{--                                    <form action="{{ route('articles.destroy', $article->id) }}" method="POST">--}}
+{{--                                        @csrf--}}
+{{--                                        @method('DELETE')--}}
+{{--                                        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Có</button>--}}
+{{--                                    </form>--}}
+
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
 
                 </td>

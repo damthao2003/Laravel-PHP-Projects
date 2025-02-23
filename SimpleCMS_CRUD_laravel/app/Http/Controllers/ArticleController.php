@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -40,9 +41,9 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         // nhan 1 doi tuong request chua data lay tu dong tu form -> truyen data vao model Article -> DB
-        $title = $request->title;
-        $content = $request->content;
-        $author = $request->author;
+//        $title = $request->title;
+//        $content = $request->content;
+//        $author = $request->author;
 
         //c1:
 //        Article::create([
@@ -56,7 +57,7 @@ class ArticleController extends Controller
 //        $article->title = $title;
 //        $article->content = $content;
 //        $article->author = $author;
-//
+
 //        $article->save();
 
         // c3: '
@@ -70,6 +71,7 @@ class ArticleController extends Controller
 
         // dieu huong ve lai index
         return redirect()->route('articles.index');
+
 
     }
 

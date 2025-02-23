@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\PersonController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,3 +19,4 @@ Route::get('/', function () {
     return view('home');
 });
 Route::resource('persons',PersonController::class);
+Route::resource('departments',DepartmentController::class);

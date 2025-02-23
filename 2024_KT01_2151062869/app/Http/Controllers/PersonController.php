@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Person;
+use App\Models\Department;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Ramsey\Uuid\Rfc4122\Validator;
 
 class PersonController extends Controller
 {
@@ -12,10 +15,17 @@ class PersonController extends Controller
      */
     public function index()
     {
-//        $persons = Person::all();
-        $persons = Person::orderBy('id','desc')->get(); // lay ra 10 ban ghi
+       // $persons = Person::all();
+      // $persons = Person::orderBy('id','desc')->take(10)->get(); // lay ra 10 ban ghi
+        //$persons = DB::table('persons')->simplePaginate(5);
+        //$persons = Person::table('persons')->orderBy('id','desc')->cursorPaginate(5);
 
-        return view('persons.index', compact('persons'));
+        $persons = Person::paginate(10);
+       // $person = Person::find(1);
+       // dd($person);
+        $departments = Department::all();
+
+        //return view('persons.index', compact('persons','departments'));
     }
 
     /**
@@ -23,7 +33,8 @@ class PersonController extends Controller
      */
     public function create()
     {
-        return view('persons.add');
+        $departments = Department::all();
+        return view('persons.add', compact('departments'));
     }
 
     /**
@@ -31,20 +42,30 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        $name = $request->name;
-        $email = $request->email;
-        $phone = $request->phone;
-        $title = $request->title;
 
+        $validateData = $request->validate([
+            'name' =>'required|string|min:3|max:50',
+            'email' => 'required|string|email|unique:persons,email', // đảm bảo email duy nhất
+            'phone' => 'required|string|max:10|unique:persons,phone',
+            'title' => 'required|string',
+//            'department_name' => 'required|string'
+            'department_id' => 'required|string'
+        ]);
+
+
+        // Tạo 1 bản Person mới và đổ dữ liệu đã xác thực
         $person = new Person();
-        $person->name = $name;
-        $person->email = $email;
-        $person->phone = $phone;
-        $person->title = $title;
+//        $person->name = $validateData['name'];
+//        $person->email = $validateData['email'];
+//        $person->phone = $validateData['phone'];
+//        $person->title = $validateData['title'];
 
+         $person->fill($validateData);
+         // liên kết department vs person
+//        $person->department_id = $department->id;
         $person->save();
-
-        return redirect()->route('persons.index');
+        //$person->create($validateData);
+        return redirect()->route('persons.index')->with('success_add', 'Person created successfully!');
     }
 
     /**
@@ -62,7 +83,9 @@ class PersonController extends Controller
     public function edit(string $id)
     {
         $person = Person::find($id);
-        return view('persons.edit',compact('person'));
+//        $department = Department::find($person->department_id);
+        $departments = Department::all();
+        return view('persons.edit',compact('person','departments'));
     }
 
     /**
@@ -70,6 +93,7 @@ class PersonController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        //c1
 //        $name = $request->name;
 //        $email = $request->email;
 //        $phone = $request->phone;
@@ -80,19 +104,24 @@ class PersonController extends Controller
 //        $person->email = $email;
 //        $person->phone = $phone;
 //        $person->title = $title;
+//        $person->update();
 //
-//        $person->update($person);
-//
+        //c2
         $validateData = $request->validate([ // data moi muon sua
-            'name' => 'required',
-            'email' =>'required',
-            'phone' => 'required',
-            'title' => 'required'
+            'name' =>'required|string',
+            'email' => 'required|string|email', // đảm bảo email duy nhất
+            'phone' => 'required|string|max:10',
+            'title' => 'required|string',
+            'department_id' => 'required|exists:departments,id'
         ]);
-        $person = Person::find($id);// data trong db can sua
 
+        $person = Person::findOrFail($id);// data trong db can sua
+//        $depart = Department::firstOrCreate(['name' => 'department_name']);
+//        $person->department_id = $depart->id;
         $person->update($validateData);
-        return redirect()->route('persons.index');
+        //$person->save();
+
+        return redirect()->route('persons.index')->with('success_update', 'Person updated successfully');
     }
 
     /**
@@ -102,6 +131,7 @@ class PersonController extends Controller
     {
         $person = Person::find($id);
         $person->delete();
-        return redirect()->route('persons.index');
+        return redirect()->route('persons.index')->with('success_delete','Person deleted successfully');
     }
 }
+

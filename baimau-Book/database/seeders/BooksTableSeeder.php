@@ -14,13 +14,14 @@ class BooksTableSeeder extends Seeder
     public function run(): void
     {
         $faker = Faker::create();
-        $genres = ['male','female','other'];
+//        $sex = ['male','female','other'];
 
         for ($i = 0; $i < 50; $i++) {
             Book::create([
-                'title' => $faker->title,
+                'title' => $faker->text(100),
                 'author' => $faker->name,
-                'genre' => $genres[array_rand($genres)], // chon ngau nhien 1 gia tri
+//                'genre' => $genres[array_rand($genres)], // chon ngau nhien 1 gia tri
+                'genre' => $faker->text(50),
                 'publicationYear' =>$faker->year,
                 'ISBN' => $faker->unique()->isbn13(),
                 'coverImageURL' =>$faker->imageUrl(),

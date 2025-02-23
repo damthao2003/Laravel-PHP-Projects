@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PersonController;
+use App\Http\Controllers\BookController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,4 +16,4 @@ use App\Http\Controllers\PersonController;
 Route::get('/', function () {
     return view('home');
 });
-Route::resource('books',PersonController::class);
+Route::resource('books',BookController::class);

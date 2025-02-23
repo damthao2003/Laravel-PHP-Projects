@@ -79,8 +79,9 @@ class PersonController extends Controller
     public function edit(string $id)
     {
         $person = Person::find($id);
-//        $department = Department::find($person->department_id);
+        //$department = Department::find($person->department_id);
         $departments = Department::all();
+
         return view('persons.edit',compact('person','departments'));
     }
 
@@ -101,7 +102,6 @@ class PersonController extends Controller
 //        $depart = Department::firstOrCreate(['name' => 'department_name']);
 //        $person->department_id = $depart->id;
         $person->update($validateData);
-        //$person->save();
 
         return redirect()->route('persons.index')->with('success_update', 'Person updated successfully');
     }

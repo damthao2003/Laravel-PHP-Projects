@@ -64,7 +64,6 @@ class PersonController extends Controller
          // liên kết department vs person
 //        $person->department_id = $department->id;
         $person->save();
-        $person->create($validateData);
         return redirect()->route('books.index')->with('success_add', 'Person created successfully!');
     }
 
@@ -93,19 +92,6 @@ class PersonController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //c1
-//        $name = $request->name;
-//        $email = $request->email;
-//        $phone = $request->phone;
-//        $title = $request->title;
-//
-//        $person = new Person();
-//        $person->name = $name;
-//        $person->email = $email;
-//        $person->phone = $phone;
-//        $person->title = $title;
-//        $person->update();
-//
         //c2
         $validateData = $request->validate([ // data moi muon sua
             'name' =>'required|string',

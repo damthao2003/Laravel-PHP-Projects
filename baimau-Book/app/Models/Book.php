@@ -9,5 +9,8 @@ class Book extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['BookID','Title','Author','Gener','PublicationYear','ISBN','CoverImageURL'];
+    protected $fillable = ['bookID','title','author','genre','publicationYear','ISBN','coverImageURL'];
+    Protected $primaryKey = 'bookID';
+
+
 }

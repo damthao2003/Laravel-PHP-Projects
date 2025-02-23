@@ -10,4 +10,5 @@ class Review extends Model
     use HasFactory;
     protected $fillable= ['reviewID','bookID','userID','rating','reviewText','reviewDate'];
     public $timestamps = false;
+    Protected $primaryKey = 'reviewID';
 }

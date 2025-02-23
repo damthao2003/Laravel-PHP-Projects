@@ -19,7 +19,8 @@ class PeopleSeeder extends Seeder
                 'name'=>$faker->name(),
                 'email'=>$faker->email(),
                 'phone'=>$faker->phoneNumber(),
-                'title'=>$faker->sentence(6,true)
+                'title'=>$faker->jobTitle(),
+                'department_id'=>$faker->numberBetween(1,10)
 
             ]);
         }

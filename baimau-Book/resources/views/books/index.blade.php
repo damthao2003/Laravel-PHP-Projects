@@ -1,6 +1,6 @@
 @extends('layout.parent')
 
-@section('title','Read Contact')
+@section('title','Book Management')
 
 
 @section('main')
@@ -17,13 +17,16 @@
                 opacity: 0;
             }
         }
+
+        h4{
+            color: #0a58ca;
+        }
     </style>
 
     <div class="container">
-        <h4 class="mt-1">Read Contact</h4>
-        <hr>
+        <h2 class="m-auto text-center">List of Books</h2>
 
-        <a href="{{route('books.create')}}" class="btn btn-success">Create Contact</a>
+        <a href="{{route('books.create')}}" class="btn btn-success"> <i class="bi bi-plus-circle"></i> Create Book</a>
 
         @if(session('success_add'))
             <div id="alert" class="alert alert-success d-flex align-items-center mt-2 fade-out" role="alert">
@@ -51,43 +54,44 @@
                 <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
                     <th scope="col">Title</th>
-                    <th scope="col">Department</th>
-                    <th scope="col" colspan="2">Action</th>
+                    <th scope="col">Author</th>
+                    <th scope="col">Genre</th>
+                    <th scope="col">PublicationYear</th>
+                    <th scope="col">ISBN</th>
+                    <th scope="col">CoverImageUrl</th>
+                    <th scope="col" colspan="3">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($persons as $person)
+                @foreach($books as $book)
                     <tr>
-                        <th scope="row"> {{$person->id}}</th>
-                        <td>{{$person->name}}</td>
-                        <td>{{$person->email}}</td>
-                        <td>{{$person->phone}}</td>
-                        <td>{{$person->title}}</td>
-                        @foreach($departments as $depart)
-                            @if($person->department_id == $depart->id)
-                                <td>{{$depart->name}}</td>
-                            @endif
-                        @endforeach
+                        <th scope="row"> {{ $i++ }}</th>
+                        <td>{{$book->title}}</td>
+                        <td>{{$book->author}}</td>
+                        <td>{{$book->genre}}</td>
+                        <td>{{$book->publicationYear}}</td>
+                        <td>{{$book->ISBN}}</td>
                         <td>
-                            <a href="{{route('books.edit', $person->id)}}" class="btn btn-primary">
-                                <i class="bi bi-pencil-square"></i> </a>
+                            <img style="width: 100px" src="{{$book->coverImageURL}}">
                         </td>
                         <td>
-{{--                            <form action="{{ route('books.destroy',$person->id) }}" method="POST">--}}
-{{--                                @csrf--}}
-{{--                                @method('DELETE')--}}
-{{--                                <button type="submit" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#{{$person}}"><i class="bi bi-trash3-fill"></i></button>--}}
-{{--                            </form>--}}
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#{{$person->id}}" >
+                            <a href="{{route('books.show', $book->bookID)}}" class="btn btn-warning">
+                                <i class="bi bi-eye-fill"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="{{route('books.edit', $book->bookID)}}" class="btn btn-primary">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#{{$book->bookID}}" >
                                 <i class="bi bi-trash3-fill"></i>
                             </button>
 
                             <!-- Modal -->
-                            <div class="modal fade" id="{{$person->id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            <div class="modal fade" id="{{$book->bookID}}" tabindex="-1" aria-labelledby="exampleModalLabel"
                                  aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -96,10 +100,10 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            Bạn có muốn xóa người dùng {{$person->id}} này không?
+                                            Bạn có muốn xóa cuốn sách có id: {{$book->bookID}} không?
                                         </div>
                                         <div class="modal-footer">
-                                            <form action="{{ route('books.destroy',$person->id) }}" method="POST">
+                                            <form action="{{ route('books.destroy',$book->bookID) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-primary"> Xác nhận</button>
@@ -118,8 +122,7 @@
         </div>
 
         <div class="mt-3">
-            {{$persons->onEachSide(1)->links()}}
-{{--            {{$books->links()}}--}}
+            {{$books->onEachSide(1)->links()}}
         </div>
 
     </div>

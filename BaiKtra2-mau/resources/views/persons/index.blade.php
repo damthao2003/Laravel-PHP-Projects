@@ -55,7 +55,7 @@
                     <th scope="col">Phone</th>
                     <th scope="col">Title</th>
                     <th scope="col">Department</th>
-                    <th scope="col" colspan="2">Action</th>
+                    <th scope="col" colspan="3">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -64,13 +64,18 @@
                         <th scope="row"> {{$person->id}}</th>
                         <td>{{$person->name}}</td>
                         <td>{{$person->email}}</td>
-                        <td>{{$person->phone}}</td>
+                        <td style="width: 13%">{{$person->phone}}</td>
                         <td>{{$person->title}}</td>
                         @foreach($departments as $depart)
                             @if($person->department_id == $depart->id)
-                                <td>{{$depart->name}}</td>
+                                <td style="width: 13%">{{$depart->name}}</td>
                             @endif
                         @endforeach
+                        <td>
+                            <a href="{{route('persons.show', $person->id)}}" class="btn btn-warning">
+                                <i class="bi bi-eye-fill"></i>
+                            </a>
+                        </td>
                         <td>
                             <a href="{{route('persons.edit', $person->id)}}" class="btn btn-primary">
                                 <i class="bi bi-pencil-square"></i> </a>
